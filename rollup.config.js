@@ -3,8 +3,7 @@ import commonJs from '@rollup/plugin-commonjs';
 import typeScript from 'rollup-plugin-typescript2';
 import injectProcessEnv from 'rollup-plugin-inject-process-env';
 
-dotenv.config({ path: './.env.production' });
-console.log('process.env', process.env);
+dotenv.config({ path: `./.env.${process.env.NODE_ENV}` });
 
 export default {
     input: 'src/index.ts',
@@ -14,7 +13,7 @@ export default {
     },
     plugins: [
         injectProcessEnv({
-            NODE_ENV: 'production',
+            NODE_ENV: process.env.NODE_ENV,
             BOT_TOKEN: process.env.BOT_TOKEN,
             BOT_NAME: process.env.BOT_NAME
         }),
