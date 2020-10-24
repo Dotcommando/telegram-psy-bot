@@ -20,6 +20,10 @@ export default class BotBody {
     private bot: Telegraf<any>;
 
     init(): void {
-        console.log(process.env.BOT_NAME);
+        this.bot.start((ctx) => ctx.reply('Welcome'));
+        this.bot.help((ctx) => ctx.reply('Send me a sticker'));
+        this.bot.on('sticker', (ctx) => ctx.reply('Nice sticker!'));
+        this.bot.hears('hi', (ctx) => ctx.reply('Hey there'));
+        this.bot.launch();
     }
 }
